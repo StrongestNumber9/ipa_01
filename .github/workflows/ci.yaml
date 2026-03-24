@@ -21,7 +21,7 @@ jobs:
         run: echo "REPO_LC=${GITHUB_REPOSITORY,,}" >> $GITHUB_ENV
 
       - name: Build containers
-        run: docker build . --tag "${{ matrix.type }}/${{ matrix.version }}:latest" -f "Dockerfile.${{ matrix.type }}" --arg ROCKY_VERSION="${{ matrix.version }}"
+        run: docker build . --tag "${{ matrix.type }}/${{ matrix.version }}:latest" -f "Dockerfile.${{ matrix.type }}" --build-arg ROCKY_VERSION="${{ matrix.version }}"
 
   run_tests:
     name: Run tests
