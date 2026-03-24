@@ -33,4 +33,4 @@ jobs:
     steps:
       - name: Run container tests
         timeout-minutes: 15
-        run: cd "src/test/functionality" && docker compose up --no-color && grep 'success' "${{ runner.temp }}/cluster.status"
+        run: cd "tests/functionality" && docker compose up --no-color && grep 'success' "${{ runner.temp }}/cluster.status"
