@@ -1,2 +1,2 @@
 #!/bin/bash
-Hi, I am "$(realpath $0)";
+echo "Hi, I am '$(realpath $0)'";

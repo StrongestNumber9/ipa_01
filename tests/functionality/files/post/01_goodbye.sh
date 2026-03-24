@@ -1,2 +1,2 @@
 #!/bin/bash
-Goodbye from "$(realpath $0)";
+echo "Goodbye from '$(realpath $0)'";
