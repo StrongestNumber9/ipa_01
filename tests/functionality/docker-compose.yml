@@ -22,10 +22,10 @@ services:
       - IPA_MANAGER_PASSWORD="S3cr3t-m4n4g3r-p4ssw0rd"
     env_file: common.env
 
-  ipa-client:
-    hostname: 'ipa-client.example.test'
-    container_name: 'ipa-client'
-    image: "client/${ROCKY_VERSION}:latest"
+  ipa-client-8:
+    hostname: 'ipa-client-8.example.test'
+    container_name: 'ipa-client-8'
+    image: "client/8:latest"
     logging:
       driver: "json-file"
       options:
@@ -35,6 +35,28 @@ services:
       ipa.example.test:
         ipv4_address: 192.168.0.101
         ipv6_address: fd12:4567:789a:1::101
+    privileged: true
+    tty: true
+    volumes:
+      - type: tmpfs
+        target: /run
+    environment:
+      - IPA_CLIENT_FLAGS=""
+    env_file: common.env
+
+  ipa-client-9:
+    hostname: 'ipa-client-9.example.test'
+    container_name: 'ipa-client-9'
+    image: "client/9:latest"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    networks:
+      ipa.example.test:
+        ipv4_address: 192.168.0.102
+        ipv6_address: fd12:4567:789a:1::102
     privileged: true
     tty: true
     volumes:
