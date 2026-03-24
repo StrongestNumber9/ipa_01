@@ -23,7 +23,7 @@ services:
     env_file: common.env
 
   ipa-client-8:
-    hostname: 'ipa-client-8.example.test'
+    hostname: 'ipa-client-8.ipa.example.test'
     container_name: 'ipa-client-8'
     image: "client/8:latest"
     logging:
@@ -45,7 +45,7 @@ services:
     env_file: common.env
 
   ipa-client-9:
-    hostname: 'ipa-client-9.example.test'
+    hostname: 'ipa-client-9.ipa.example.test'
     container_name: 'ipa-client-9'
     image: "client/9:latest"
     logging:
