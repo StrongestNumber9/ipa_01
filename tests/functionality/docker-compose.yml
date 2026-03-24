@@ -17,6 +17,8 @@ services:
     volumes:
       - type: tmpfs
         target: /run
+      - type: tmpfs
+        target: /var/run
     environment:
       - IPA_01_SERVER_FLAGS=--setup-dns --no-forwarders --no-ntp
       - IPA_01_MANAGER_PASSWORD=S3cr3t-m4n4g3r-p4ssw0rd
@@ -46,6 +48,8 @@ services:
     volumes:
       - type: tmpfs
         target: /run
+      - type: tmpfs
+        target: /var/run
     environment:
       - IPA_01_CLIENT_FLAGS=""
     env_file: common.env
@@ -71,6 +75,8 @@ services:
     volumes:
       - type: tmpfs
         target: /run
+      - type: tmpfs
+        target: /var/run
     environment:
       - IPA_01_CLIENT_FLAGS="--force-join"
     env_file: common.env
