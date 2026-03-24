@@ -18,8 +18,8 @@ services:
       - type: tmpfs
         target: /run
     environment:
-      - IPA_01_SERVER_FLAGS="--setup-dns --no-forwarders --no-ntp"
-      - IPA_01_MANAGER_PASSWORD="S3cr3t-m4n4g3r-p4ssw0rd"
+      - IPA_01_SERVER_FLAGS=--setup-dns --no-forwarders --no-ntp
+      - IPA_01_MANAGER_PASSWORD=S3cr3t-m4n4g3r-p4ssw0rd
     env_file: common.env
     healthcheck:
       test: ["CMD-SHELL", "ipactl status"]
