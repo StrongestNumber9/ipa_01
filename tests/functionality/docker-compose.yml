@@ -25,7 +25,7 @@ services:
       test: ["CMD-SHELL", "ipactl status"]
       interval: 10s
       retries: 54
-      start_period: 60
+      start_period: 60s
       timeout: 10s
 
   ipa-client-8:
@@ -88,5 +88,3 @@ networks:
        - subnet: 192.168.0.0/24
        - subnet: fd12:4567:789a:1::/64
          gateway: fd12:4567:789a:1::1
-
-         
