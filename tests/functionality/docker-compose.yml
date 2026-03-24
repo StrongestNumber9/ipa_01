@@ -1,0 +1,58 @@
+services:
+  ipa-server:
+    hostname: 'ipa-server.ipa.example.test'
+    container_name: 'ipa-server'
+    image: "server/${ROCKY_VERSION}:latest"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    networks:
+      ipa.example.test:
+        ipv4_address: 192.168.0.100
+        ipv6_address: fd12:4567:789a:1::100
+    privileged: true
+    tty: true
+    volumes:
+      - type: tmpfs
+        target: /run
+    environment:
+      - IPA_SERVER_FLAGS="--setup-dns --no-forwarders --no-ntp"
+      - IPA_MANAGER_PASSWORD="S3cr3t-m4n4g3r-p4ssw0rd"
+    env_file: common.env
+
+  ipa-client:
+    hostname: 'ipa-client.example.test'
+    container_name: 'ipa-client'
+    image: "client/${ROCKY_VERSION}:latest"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    networks:
+      ipa.example.test:
+        ipv4_address: 192.168.0.101
+        ipv6_address: fd12:4567:789a:1::101
+    privileged: true
+    tty: true
+    volumes:
+      - type: tmpfs
+        target: /run
+    environment:
+      - IPA_CLIENT_FLAGS=""
+    env_file: common.env
+
+networks:
+  ipa.example.test:
+    name: ipa.example.test
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+       - subnet: 192.168.0.0/24
+       - subnet: fd12:4567:789a:1::/64
+         gateway: fd12:4567:789a:1::1
+
+         
