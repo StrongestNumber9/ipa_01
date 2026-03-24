@@ -28,4 +28,4 @@ jobs:
 
       - name: Run container tests
         timeout-minutes: 15
-        run: cd "tests/functionality" && docker compose up --no-color && grep 'success' "${{ runner.temp }}/cluster.status"
+        run: cd "tests/functionality" && docker compose up --no-color --abort-on-container-exit && grep 'success' "${{ runner.temp }}/client-8.status" && grep 'success' "${{ runner.temp }}/client-9.status"

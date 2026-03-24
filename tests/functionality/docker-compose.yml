@@ -18,9 +18,15 @@ services:
       - type: tmpfs
         target: /run
     environment:
-      - IPA_SERVER_FLAGS="--setup-dns --no-forwarders --no-ntp"
-      - IPA_MANAGER_PASSWORD="S3cr3t-m4n4g3r-p4ssw0rd"
+      - IPA_01_SERVER_FLAGS="--setup-dns --no-forwarders --no-ntp"
+      - IPA_01_MANAGER_PASSWORD="S3cr3t-m4n4g3r-p4ssw0rd"
     env_file: common.env
+    healthcheck:
+      test: ["CMD-SHELL", "ipactl status"]
+      interval: 10s
+      retries: 54
+      start_period: 60
+      timeout: 10s
 
   ipa-client-8:
     hostname: 'ipa-client-8.ipa.example.test'
@@ -41,8 +47,11 @@ services:
       - type: tmpfs
         target: /run
     environment:
-      - IPA_CLIENT_FLAGS=""
+      - IPA_01_CLIENT_FLAGS=""
     env_file: common.env
+    depends_on:
+      ipa-server:
+        condition: service_healthy
 
   ipa-client-9:
     hostname: 'ipa-client-9.ipa.example.test'
@@ -63,8 +72,11 @@ services:
       - type: tmpfs
         target: /run
     environment:
-      - IPA_CLIENT_FLAGS=""
+      - IPA_01_CLIENT_FLAGS="--force-join"
     env_file: common.env
+    depends_on:
+      ipa-server:
+        condition: service_healthy
 
 networks:
   ipa.example.test:

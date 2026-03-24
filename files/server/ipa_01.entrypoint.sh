@@ -1,5 +1,11 @@
 #!/usr/bin/bash
-set -e;
+ipa_01_poweroff() {
+    echo "Failure detected, powering off";
+    systemctl start poweroff.target;
+}
+
+trap 'ipa_01_poweroff' ERR;
+
 export IPA_SERVER_FLAGS="${IPA_SERVER_FLAGS:---auto-reverse --setup-dns --no-forwarders --no-ntp}";
 for required_env_var in IPA_01_DOMAIN IPA_01_MANAGER_PASSWORD IPA_01_ADMIN_PASSWORD; do
     if [ "${!required_env_var}" == "" ]; then
@@ -7,13 +13,6 @@ for required_env_var in IPA_01_DOMAIN IPA_01_MANAGER_PASSWORD IPA_01_ADMIN_PASSW
         exit 1;
     fi;
 done;
-
-ipa_01_poweroff() {
-    echo "Failure detected, powering off";
-    systemctl start poweroff.target;
-}
-
-trap 'ipa_01_poweroff' ERR;
 
 for file in /ipa_01.conf.d/pre/*.sh; do
     bash "${file}";
