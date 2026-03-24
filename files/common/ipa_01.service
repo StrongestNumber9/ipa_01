@@ -1,5 +1,5 @@
 [Unit]
-Description=Entrypoint
+Description=ipa_01 entrypoint
 ConditionPathExists=/ipa_01.entrypoint.sh
 
 [Service]
