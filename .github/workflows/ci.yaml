@@ -23,9 +23,14 @@ jobs:
         run: |
           docker build . --tag client/8:latest -f Dockerfile.client --build-arg ROCKY_VERSION=8 &
           docker build . --tag client/9:latest -f Dockerfile.client --build-arg ROCKY_VERSION=9 &
-          docker build . --tag server/9:latest -f Dockerfile.server --build-arg ROCKY_VERSION=9 &
+          docker build . --tag server:latest -f Dockerfile.server &
           wait;
 
       - name: Run container tests
         timeout-minutes: 15
-        run: cd "tests/functionality" && docker compose up --no-color --abort-on-container-exit && grep 'success' "${{ runner.temp }}/client-8.status" && grep 'success' "${{ runner.temp }}/client-9.status"
+        run:
+          cd "tests/functionality";
+          docker compose up --no-color --abort-on-container-exit;
+          grep 'success' "${{ runner.temp }}/ipa-server.status";
+          grep 'success' "${{ runner.temp }}/ipa-client-8.status";
+          grep 'success' "${{ runner.temp }}/ipa-client-9.status";
