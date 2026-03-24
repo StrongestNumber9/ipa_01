@@ -31,6 +31,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: build_containers
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Run container tests
         timeout-minutes: 15
         run: cd "tests/functionality" && docker compose up --no-color && grep 'success' "${{ runner.temp }}/cluster.status"
