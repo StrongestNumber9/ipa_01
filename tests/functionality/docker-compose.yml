@@ -2,7 +2,7 @@ services:
   ipa-server:
     hostname: 'ipa-server.ipa.example.test'
     container_name: 'ipa-server'
-    image: "server/${ROCKY_VERSION}:latest"
+    image: "server/9:latest"
     logging:
       driver: "json-file"
       options:
