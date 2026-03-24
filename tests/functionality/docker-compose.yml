@@ -21,9 +21,6 @@ services:
         target: /var/run
       - ./files/:/ipa_01.conf.d/
       - ${RUNNER_TEMP:-/tmp/}:/return
-    environment:
-      - IPA_01_SERVER_FLAGS=--setup-dns --no-forwarders --no-ntp
-      - IPA_01_MANAGER_PASSWORD=S3cr3t-m4n4g3r-p4ssw0rd
     env_file: common.env
     healthcheck:
       test: ["CMD-SHELL", "ipactl status"]
@@ -54,8 +51,6 @@ services:
         target: /var/run
       - ./files/:/ipa_01.conf.d/
       - ${RUNNER_TEMP:-/tmp/}:/return
-    environment:
-      - IPA_01_CLIENT_FLAGS=""
     env_file: common.env
     depends_on:
       ipa-server:
@@ -83,8 +78,6 @@ services:
         target: /var/run
       - ./files/:/ipa_01.conf.d/
       - ${RUNNER_TEMP:-/tmp/}:/return
-    environment:
-      - IPA_01_CLIENT_FLAGS="--force-join"
     env_file: common.env
     depends_on:
       ipa-server:
