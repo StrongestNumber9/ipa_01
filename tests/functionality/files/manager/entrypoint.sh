@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 echo "Waiting for success scripts to exist";
-for node in ipa-server ipa-client8 ipa-client-9; do
-    for script in post pre; do
+for script in pre post; do
+    for node in ipa-server ipa-client-8 ipa-client-9; do
         FILENAME="/return/${node}.${script}";
         echo "Waiting for '${FILENAME}' to appear";
         while [ ! -f "${FILENAME}" ]; do
