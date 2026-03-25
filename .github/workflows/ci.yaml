@@ -32,7 +32,7 @@ jobs:
           cd "tests/functionality";
           docker compose up --no-color --exit-code-from manager;
           for script in pre post; do
-            for node in ipa-server ipa-client8 ipa-client-9; do
+            for node in ipa-server ipa-client-8 ipa-client-9; do
               echo "Checking if '${script}' script triggered for node '${node}'";
               grep 'success' "${{ runner.temp }}/${node}.${script}";
             done;
