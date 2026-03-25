@@ -30,7 +30,7 @@ jobs:
         timeout-minutes: 15
         run:
           cd "tests/functionality";
-          docker compose up --no-color --exit-code-from manager;
+          docker compose up --no-color --exit-code-from test-runner;
           for script in pre post; do
             for node in ipa-server ipa-client-el8 ipa-client-el9; do
               echo "Checking if '${script}' script triggered for node '${node}'";
