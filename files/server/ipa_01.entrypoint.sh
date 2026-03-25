@@ -26,3 +26,5 @@ ipa-server-install --unattended --domain "${IPA_01_DOMAIN,,}" --realm "${IPA_01_
 for file in /ipa_01.conf.d/post/*.sh; do
     [[ -x "${file}" ]] && bash "${file}";
 done;
+
+exit 0;
