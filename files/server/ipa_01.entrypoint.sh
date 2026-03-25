@@ -1,8 +1,6 @@
 #!/usr/bin/bash
 ipa_01_poweroff() {
     echo "Failure detected, powering off";
-    systemctl status ipa_01; # DEBUG
-    journalctl -u ipa_01; # DEBUG
     systemctl start poweroff.target;
 }
 
@@ -26,5 +24,7 @@ ipa-server-install --unattended --domain "${IPA_01_DOMAIN,,}" --realm "${IPA_01_
 for file in /ipa_01.conf.d/post/*.sh; do
     [[ -x "${file}" ]] && bash "${file}";
 done;
+
+touch /ipa_01.ready;
 
 exit 0;

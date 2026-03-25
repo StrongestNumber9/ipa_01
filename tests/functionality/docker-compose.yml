@@ -24,7 +24,7 @@ services:
       - ${RUNNER_TEMP:-/tmp/ipa_01_tmp/}:/return/
     env_file: common.env
     healthcheck:
-      test: ["CMD-SHELL", "ipactl status"]
+      test: ["CMD-SHELL", "[ -f /ipa_01.ready ] && ipactl status"]
       interval: 10s
       retries: 54
       start_period: 60s

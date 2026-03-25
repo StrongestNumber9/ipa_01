@@ -1,8 +1,6 @@
 #!/usr/bin/bash
 ipa_01_poweroff() {
     echo "Failure detected, powering off";
-    systemctl status ipa_01; # DEBUG
-    journalctl -u ipa_01; # DEBUG
     systemctl start poweroff.target;
 }
 
