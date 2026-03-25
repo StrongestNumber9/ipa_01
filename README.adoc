@@ -6,17 +6,17 @@ Easy to use FreeIPA containers. Intended to be used with containerized tests tha
 
 Automatic installation of FreeIPA server and client.
 
-Supported server containers:
+Supported Server containers:
 
 [cols="1,1"]
 |===
 |Server container|Based on
 
 |`ghcr.io/teragrep/ipa_01/server:latest`
-|`rockylinux/rockylinux:8`
+|`rockylinux/rockylinux:9`
 |===
 
-Supported client containers:
+Supported Client containers:
 
 [cols="1,1"]
 |===
