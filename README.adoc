@@ -29,7 +29,7 @@ Supported client containers:
 |`rockylinux/rockylinux:9`
 |===
 
-The containers can be pinned to certainl releases of `:latest`, for example with `:1.0.0`.
+The containers can be pinned to certain releases of `:latest`, for example with `:1.0.0`.
 
 Supports running arbitrary shell scripts before and after the Server/Client installation.
 
