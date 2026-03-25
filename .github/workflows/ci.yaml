@@ -30,7 +30,10 @@ jobs:
         timeout-minutes: 15
         run:
           cd "tests/functionality";
-          docker compose up --no-color --abort-on-container-exit;
-          grep 'success' "${{ runner.temp }}/ipa-server.status";
-          grep 'success' "${{ runner.temp }}/ipa-client-8.status";
-          grep 'success' "${{ runner.temp }}/ipa-client-9.status";
+          docker compose up --no-color --exit-code-from manager;
+          for node in ipa-server ipa-client8 ipa-client-9; do
+            for script in post pre; do
+              echo "Checking if '${script}' script triggered for node '${node}'";
+              grep 'success' "${{ runner.temp }}/${node}.${script}";
+            done;
+          done;

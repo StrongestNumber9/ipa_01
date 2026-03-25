@@ -19,8 +19,9 @@ services:
         target: /run
       - type: tmpfs
         target: /var/run
-      - ./files/:/ipa_01.conf.d/
-      - ${RUNNER_TEMP:-/tmp/}:/return
+      - ./files/pre/:/ipa_01.conf.d/pre/
+      - ./files/post/:/ipa_01.conf.d/post/
+      - ${RUNNER_TEMP:-/tmp/}:/return/
     env_file: common.env
     healthcheck:
       test: ["CMD-SHELL", "ipactl status"]
@@ -49,8 +50,9 @@ services:
         target: /run
       - type: tmpfs
         target: /var/run
-      - ./files/:/ipa_01.conf.d/
-      - ${RUNNER_TEMP:-/tmp/}:/return
+      - ./files/pre/:/ipa_01.conf.d/pre/
+      - ./files/post/:/ipa_01.conf.d/post/
+      - ${RUNNER_TEMP:-/tmp/}:/return/
     env_file: common.env
     depends_on:
       ipa-server:
@@ -76,12 +78,33 @@ services:
         target: /run
       - type: tmpfs
         target: /var/run
-      - ./files/:/ipa_01.conf.d/
-      - ${RUNNER_TEMP:-/tmp/}:/return
+      - ./files/pre/:/ipa_01.conf.d/pre/
+      - ./files/post/:/ipa_01.conf.d/post/
+      - ${RUNNER_TEMP:-/tmp/}:/return/
     env_file: common.env
     depends_on:
       ipa-server:
         condition: service_healthy
+
+  manager:
+    hostname: 'manager.ipa.example.test'
+    container_name: 'manager'
+    image: "rockylinux/rockylinux:9"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    networks:
+      ipa.example.test:
+        ipv4_address: 192.168.0.103
+        ipv6_address: fd12:4567:789a:1::103
+    privileged: true
+    tty: true
+    volumes:
+      - ./files/manager/:/manager/
+      - ${RUNNER_TEMP:-/tmp/}:/return/
+    entrypoint: /usr/bin/bash /manager/entrypoint.sh
 
 networks:
   ipa.example.test:
