@@ -8,7 +8,7 @@ ipa_01_poweroff() {
 
 trap 'ipa_01_poweroff' ERR;
 
-IPA_SERVER_FLAGS="${IPA_SERVER_FLAGS:---auto-reverse --setup-dns --no-forwarders --no-ntp}";
+IPA_01_SERVER_FLAGS="${IPA_01_SERVER_FLAGS:---auto-reverse --setup-dns --no-forwarders --no-ntp}";
 for required_env_var in IPA_01_DOMAIN IPA_01_MANAGER_PASSWORD IPA_01_ADMIN_PASSWORD; do
     if [ "${!required_env_var}" == "" ]; then
         echo "Failed to find value for '${required_env_var}', failing";

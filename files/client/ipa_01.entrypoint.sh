@@ -8,7 +8,7 @@ ipa_01_poweroff() {
 
 trap 'ipa_01_poweroff' ERR;
 
-IPA_CLIENT_FLAGS="${IPA_CLIENT_FLAGS:---no-ntp --force-join}";
+IPA_01_CLIENT_FLAGS="${IPA_01_CLIENT_FLAGS:---no-ntp --force-join}";
 for required_env_var in IPA_01_SERVER_HOSTNAME IPA_01_DOMAIN IPA_01_ADMIN_PASSWORD; do
     if [ "${!required_env_var}" == "" ]; then
         echo "Failed to find value for '${required_env_var}', failing";
