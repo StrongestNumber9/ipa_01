@@ -33,7 +33,7 @@ services:
   ipa-client-8:
     hostname: 'ipa-client-8.ipa.example.test'
     container_name: 'ipa-client-8'
-    image: "client/8:latest"
+    image: "client/el8:latest"
     logging:
       driver: "json-file"
       options:
@@ -61,7 +61,7 @@ services:
   ipa-client-9:
     hostname: 'ipa-client-9.ipa.example.test'
     container_name: 'ipa-client-9'
-    image: "client/9:latest"
+    image: "client/el9:latest"
     logging:
       driver: "json-file"
       options:

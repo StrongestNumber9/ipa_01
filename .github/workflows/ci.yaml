@@ -21,8 +21,8 @@ jobs:
 
       - name: Build images
         run: |
-          docker build . --tag client/8:latest -f Dockerfile.client --build-arg ROCKY_VERSION=8 &
-          docker build . --tag client/9:latest -f Dockerfile.client --build-arg ROCKY_VERSION=9 &
+          docker build . --tag client/el8:latest -f Dockerfile.client --build-arg ROCKY_VERSION=8 &
+          docker build . --tag client/el9:latest -f Dockerfile.client --build-arg ROCKY_VERSION=9 &
           docker build . --tag server:latest -f Dockerfile.server &
           wait;
 
@@ -32,7 +32,7 @@ jobs:
           cd "tests/functionality";
           docker compose up --no-color --exit-code-from manager;
           for script in pre post; do
-            for node in ipa-server ipa-client-8 ipa-client-9; do
+            for node in ipa-server ipa-client-el8 ipa-client-el9; do
               echo "Checking if '${script}' script triggered for node '${node}'";
               grep 'success' "${{ runner.temp }}/${node}.${script}";
             done;
